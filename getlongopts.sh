@@ -23,7 +23,7 @@ while getopts "-:a:b:c:d" OPT; do
 	# Original post: https://stackoverflow.com/a/28466267/519360
 	# Long option: reformulate OPT and OPTARG
 	if [ "$OPT" = "-" ]; then
-		OPT=$OPTARG                    # Extract long option name
+		OPT=-$OPTARG                   # Extract long option name
 		shift $((OPTIND-1))            # Remove parsed option from $@ list
 		OPTARG=$(read_first_arg $@)    # Extract long option argument (may be empty)
 		FIRST_CHAR=$(read_first_char $OPTARG)
@@ -36,16 +36,16 @@ while getopts "-:a:b:c:d" OPT; do
 		fi
 	fi
 	case "$OPT" in
-		a|long-a)
+		a|-long-a)
 			A=$OPTARG
 			;;
-		b|long-b)
+		b|-long-b)
 			B=$OPTARG
 			;;
-		c|long-c)
+		c|-long-c)
 			C=$OPTARG
 			;;
-		d|long-d)
+		d|-long-d)
 			D=Y
 			;;
 		*)
