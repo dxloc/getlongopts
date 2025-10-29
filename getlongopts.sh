@@ -95,16 +95,22 @@ gen_compgen() {
 }
 
 gen_compreply() {
+	if [ "${short_opt}" != "" ] && [ "${short_opt}" != "null" ]; then
+		short_opt="-${short_opt}|"
+	else
+		short_opt=" "
+	fi
+
 	long_opt="--${long_opt}"
 
 	case "${arg_type}" in
 		"directory")
-			printf "%${1}s%s)\n" " " "${long_opt}"
+			printf "%${1}s%s%s)\n" " " "${short_opt}" "${long_opt}"
 			printf "%${2}sCOMPREPLY=( \$(compgen -d -- \${cur}) )\n" " "
 			printf "%${2}s;;\n" " "
 			;;
 		"file")
-			printf "%${1}s%s)\n" " " "${long_opt}"
+			printf "%${1}s%s%s)\n" " " "${short_opt}" "${long_opt}"
 			printf "%${2}sCOMPREPLY=( \$(compgen -f -- \${cur}) )\n" " "
 			printf "%${2}s;;\n" " "
 			;;
