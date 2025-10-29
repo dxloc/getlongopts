@@ -148,7 +148,7 @@ do_bash_completion() {
 	echo "            ;;"
 	echo "    esac"
 	echo "} &&"
-	echo "    complete -F _$1 $1"
+	echo "    complete -o nospace -F _$1 $1"
 	echo ""
 	echo "# ex: ts=4 sw=4 et filetype=sh"
 }
